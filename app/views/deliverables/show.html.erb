@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @deliverable %>
+
+<div>
+  <%= link_to "Edit this deliverable", edit_deliverable_path(@deliverable) %> |
+  <%= link_to "Back to deliverables", deliverables_path %>
+
+  <%= button_to "Destroy this deliverable", @deliverable, method: :delete %>
+</div>

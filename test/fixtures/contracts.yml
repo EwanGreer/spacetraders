@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contract_id: MyString
+  faction_symbol: MyString
+  contract_type: MyString
+  accepted: false
+  fulfilled: false
+  terms_deadline: 2025-03-30 23:16:41
+  expiration: 2025-03-30 23:16:41
+  deadline_to_accept: 2025-03-30 23:16:41
+  payment_on_accepted: 1
+  payment_on_fulfilled: 1
+  terms: MyText
+
+two:
+  contract_id: MyString
+  faction_symbol: MyString
+  contract_type: MyString
+  accepted: false
+  fulfilled: false
+  terms_deadline: 2025-03-30 23:16:41
+  expiration: 2025-03-30 23:16:41
+  deadline_to_accept: 2025-03-30 23:16:41
+  payment_on_accepted: 1
+  payment_on_fulfilled: 1
+  terms: MyText

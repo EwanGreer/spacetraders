@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_30_212301) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_30_221532) do
   create_table "agents", force: :cascade do |t|
     t.string "symbol"
     t.string "faction"
@@ -23,6 +23,60 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_212301) do
     t.integer "credits"
     t.integer "shipcount"
     t.index ["user_id"], name: "index_agents_on_user_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.string "contract_id"
+    t.string "faction_symbol"
+    t.string "contract_type"
+    t.boolean "accepted"
+    t.boolean "fulfilled"
+    t.datetime "terms_deadline"
+    t.datetime "expiration"
+    t.datetime "deadline_to_accept"
+    t.integer "payment_on_accepted"
+    t.integer "payment_on_fulfilled"
+    t.text "terms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "create_contracts", force: :cascade do |t|
+    t.string "contract_id"
+    t.string "faction_symbol"
+    t.string "contract_type"
+    t.boolean "accepted"
+    t.boolean "fulfilled"
+    t.datetime "terms_deadline"
+    t.datetime "expiration"
+    t.datetime "deadline_to_accept"
+    t.integer "payment_on_accepted"
+    t.integer "payment_on_fulfilled"
+    t.text "terms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "create_deliverables", force: :cascade do |t|
+    t.integer "contract_id", null: false
+    t.string "trade_symbol"
+    t.string "destination_symbol"
+    t.integer "units_required"
+    t.integer "units_fulfilled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_id"], name: "index_create_deliverables_on_contract_id"
+  end
+
+  create_table "deliverables", force: :cascade do |t|
+    t.integer "contract_id", null: false
+    t.string "trade_symbol"
+    t.string "destination_symbol"
+    t.integer "units_required"
+    t.integer "units_fulfilled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_id"], name: "index_deliverables_on_contract_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -45,5 +99,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_212301) do
   end
 
   add_foreign_key "agents", "users"
+  add_foreign_key "create_deliverables", "contracts"
+  add_foreign_key "deliverables", "contracts"
   add_foreign_key "sessions", "users"
 end

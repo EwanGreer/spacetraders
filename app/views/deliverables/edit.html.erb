@@ -1,0 +1,12 @@
+<% content_for :title, "Editing deliverable" %>
+
+<h1>Editing deliverable</h1>
+
+<%= render "form", deliverable: @deliverable %>
+
+<br>
+
+<div>
+  <%= link_to "Show this deliverable", @deliverable %> |
+  <%= link_to "Back to deliverables", deliverables_path %>
+</div>

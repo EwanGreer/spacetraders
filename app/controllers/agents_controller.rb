@@ -33,8 +33,13 @@ class AgentsController < ApplicationController
 
     response_hash = resp.parsed_response
     token = response_hash["data"]["token"]
+    agent_data = response_hash["data"]["agent"]
 
     @agent.agent_token = token
+    @agent.accountId = agent_data["accountId"]
+    @agent.credits = agent_data["credits"]
+    @agent.shipcount = agent_data["shipCount"]
+    @agent.headquarters = agent_data["headquarters"]
 
     respond_to do |format|
       if @agent.save

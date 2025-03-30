@@ -1,0 +1,11 @@
+<% content_for :title, "New deliverable" %>
+
+<h1>New deliverable</h1>
+
+<%= render "form", deliverable: @deliverable %>
+
+<br>
+
+<div>
+  <%= link_to "Back to deliverables", deliverables_path %>
+</div>

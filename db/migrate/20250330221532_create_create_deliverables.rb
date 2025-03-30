@@ -1,0 +1,13 @@
+class CreateCreateDeliverables < ActiveRecord::Migration[8.0]
+  def change
+    create_table :create_deliverables do |t|
+      t.references :contract, null: false, foreign_key: true
+      t.string :trade_symbol
+      t.string :destination_symbol
+      t.integer :units_required
+      t.integer :units_fulfilled
+
+      t.timestamps
+    end
+  end
+end

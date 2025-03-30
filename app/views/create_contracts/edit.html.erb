@@ -1,0 +1,12 @@
+<% content_for :title, "Editing create contract" %>
+
+<h1>Editing create contract</h1>
+
+<%= render "form", create_contract: @create_contract %>
+
+<br>
+
+<div>
+  <%= link_to "Show this create contract", @create_contract %> |
+  <%= link_to "Back to create contracts", create_contracts_path %>
+</div>
