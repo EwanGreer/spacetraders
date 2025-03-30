@@ -31,7 +31,7 @@ class AgentsController < ApplicationController
       raise(resp)
     end
 
-    response_hash = resp.parsed_response  # Converts JSON to a Ruby hash
+    response_hash = resp.parsed_response
     token = response_hash["data"]["token"]
 
     @agent.agent_token = token
