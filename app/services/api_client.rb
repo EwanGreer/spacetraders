@@ -1,0 +1,26 @@
+class ApiClient
+  include HTTParty
+  base_uri "https://api.spacetraders.io/v2/".freeze
+
+  def initialize(user)
+    @user = user
+  end
+
+  def register(payload = {})
+    options = {
+      headers: {
+        "Content-Type"  => "application/json",
+        "Authorization" => "Bearer #{@user.account_token}"
+      },
+      body: payload.to_json
+    }
+    self.class.post("/register", options)
+  end
+
+  private
+
+  # Fetch the API key securely from environment variables or credentials
+  def api_key
+    ENV["API_KEY"] || Rails.application.credentials.api_key
+  end
+end

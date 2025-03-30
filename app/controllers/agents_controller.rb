@@ -23,6 +23,19 @@ class AgentsController < ApplicationController
   def create
     @agent = current_user.agents.build(agent_params)
 
+    client = ::ApiClient.new(current_user)
+    resp = client.register(symbol: params[:agent][:symbol], faction: params[:agent][:faction])
+
+    if !resp.success?
+      print(resp)
+      raise(resp)
+    end
+
+    response_hash = resp.parsed_response  # Converts JSON to a Ruby hash
+    token = response_hash["data"]["token"]
+
+    @agent.apikey = token
+
     respond_to do |format|
       if @agent.save
         format.html { redirect_to @agent, notice: "Agent was successfully created." }
@@ -65,6 +78,6 @@ class AgentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def agent_params
-      params.expect(agent: [ :symbol, :faction, :apikey ])
+      params.expect(agent: [ :symbol, :faction ])
     end
 end
