@@ -6,10 +6,11 @@
 
 <div id="agents">
   <% @agents.each do |agent| %>
-    <%= render agent %>
-    <p>
+    <%= agent.symbol %>
+    <span>
       <%= link_to "Show this agent", agent %>
-    </p>
+    </span>
+    <br>
   <% end %>
 </div>
 
