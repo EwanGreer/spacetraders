@@ -21,7 +21,7 @@ class AgentsController < ApplicationController
 
   # POST /agents or /agents.json
   def create
-    @agent = Agent.new(agent_params)
+    @agent = current_user.agents.build(agent_params)
 
     respond_to do |format|
       if @agent.save
