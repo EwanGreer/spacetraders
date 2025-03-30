@@ -4,6 +4,7 @@ class ApiClient
 
   def initialize(user)
     @user = user
+    @agent = Agent.find(@user.active_agent)
   end
 
   def register(payload = {})
@@ -15,6 +16,16 @@ class ApiClient
       body: payload.to_json
     }
     self.class.post("/register", options)
+  end
+
+  def get_contracts
+    options = {
+      headers: {
+        "Content-Type"  => "application/json",
+        "Authorization" => "Bearer #{@agent.agent_token}"
+      }
+    }
+    self.class.get("/my/contracts", options)
   end
 
   private

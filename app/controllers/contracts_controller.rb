@@ -4,6 +4,9 @@ class ContractsController < ApplicationController
   # GET /contracts or /contracts.json
   def index
     @contracts = Contract.all
+
+
+    client = ::ApiClient.new(current_user)
   end
 
   # GET /contracts/1 or /contracts/1.json

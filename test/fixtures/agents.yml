@@ -3,9 +3,7 @@
 one:
   symbol: SuperMan
   faction: EARTH
-  apikey: abc123
 
 two:
   symbol: SpiderMan
   faction: AVENGERS
-  apikey: 123abc

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_30_221532) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_30_232835) do
   create_table "agents", force: :cascade do |t|
     t.string "symbol"
     t.string "faction"
@@ -27,18 +27,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_221532) do
 
   create_table "contracts", force: :cascade do |t|
     t.string "contract_id"
-    t.string "faction_symbol"
+    t.string "factionSymbol"
     t.string "contract_type"
     t.boolean "accepted"
     t.boolean "fulfilled"
     t.datetime "terms_deadline"
     t.datetime "expiration"
-    t.datetime "deadline_to_accept"
-    t.integer "payment_on_accepted"
-    t.integer "payment_on_fulfilled"
+    t.datetime "deadlineToAccept"
+    t.integer "paymentOnAccepted"
+    t.integer "paymentOnFulfilled"
     t.text "terms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "agent_id"
   end
 
   create_table "create_contracts", force: :cascade do |t|
@@ -94,6 +95,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_221532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "account_token"
+    t.string "active_agent"
     t.index ["account_token"], name: "index_users_on_account_token", unique: true
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end

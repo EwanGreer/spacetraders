@@ -1,10 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @agent %>
-
+<%#
+   NOTE: this will be where all "actions will be carried out. 
+  i.e. displying ships, and contracts. Each ship/contract will have an action page of their own." 
+%>
 <div>
   <%= link_to "Edit this agent", edit_agent_path(@agent) %> |
   <%= link_to "Back to agents", agents_path %>
 
   <%= button_to "Destroy this agent", @agent, method: :delete %>
 </div>
+
+<%= render partial: 'contracts/contract', collection: @contracts, as: :contract %>

@@ -8,6 +8,48 @@ class AgentsController < ApplicationController
 
   # GET /agents/1 or /agents/1.json
   def show
+    # TODO: create migration to convert payment on accpeted and fulfilled to booleans
+    @user = current_user
+    @agent = Agent.find(params[:id])
+
+    @user.active_agent = @agent.id
+    if @user.save
+      client = ::ApiClient.new(@user)
+      resp = client.get_contracts
+
+      if resp.success?
+        response_hash = resp.parsed_response
+        Rails.logger.info("API response: #{response_hash.inspect}")
+
+        contracts_by_id = {}
+
+        response_hash["data"].each do |contract_hash|
+          contract_id = contract_hash["id"].to_i
+
+          if contract_hash.key?("type")
+            contract_hash["contract_type"] = contract_hash.delete("type")
+          end
+
+          contract = contracts_by_id[contract_id] || Contract.find_or_initialize_by(id: contract_id)
+
+          contract.assign_attributes(contract_hash)
+          contract.agent = @agent
+
+          contract.save!
+
+          contracts_by_id[contract_id] = contract
+        end
+
+        @contracts = contracts_by_id.values
+      else
+        Rails.logger.error("API Error: #{resp.code} - #{resp.message}")
+        flash[:error] = "There was an error fetching contracts."
+        @contracts = []
+      end
+    else
+      flash[:error] = "Failed to update active agent."
+      @contracts = []
+    end
   end
 
   # GET /agents/new
