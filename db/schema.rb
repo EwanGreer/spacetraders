@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_30_110251) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_30_193918) do
   create_table "agents", force: :cascade do |t|
     t.string "symbol"
     t.string "faction"
@@ -35,6 +35,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_30_110251) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "account_token"
+    t.index ["account_token"], name: "index_users_on_account_token", unique: true
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
