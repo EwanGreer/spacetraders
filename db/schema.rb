@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_30_204537) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_30_205850) do
   create_table "agents", force: :cascade do |t|
     t.string "symbol"
     t.string "faction"
-    t.string "apikey"
+    t.string "agent_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
