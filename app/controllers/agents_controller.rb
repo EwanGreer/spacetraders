@@ -14,6 +14,13 @@ class AgentsController < ApplicationController
 
     @user.active_agent = @agent.id
     if @user.save
+      latest_contract = @agent.contracts.last
+      if latest_contract && (latest_contract.created_at > 5.minutes.ago || latest_contract.updated_at > 5.minutes.ago)
+        @contracts = @agent.contracts
+
+        return
+      end
+
       client = ::ApiClient.new(@user)
       resp = client.get_contracts
 
