@@ -1,9 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  symbol: SuperMan
-  faction: EARTH
+  symbol: MyString
+  faction: MyString
+  agent_token: MyString
+  user: one
+  accountId: MyString
+  headquarters: MyString
+  credits: 1
+  shipcount: 1
 
 two:
-  symbol: SpiderMan
-  faction: AVENGERS
+  symbol: MyString
+  faction: MyString
+  agent_token: MyString
+  user: two
+  accountId: MyString
+  headquarters: MyString
+  credits: 1
+  shipcount: 1

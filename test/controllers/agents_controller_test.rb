@@ -17,7 +17,7 @@ class AgentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create agent" do
     assert_difference("Agent.count") do
-      post agents_url, params: { agent: { apikey: @agent.apikey, faction: @agent.faction, symbol: @agent.symbol } }
+      post agents_url, params: { agent: { accountId: @agent.accountId, agent_token: @agent.agent_token, credits: @agent.credits, faction: @agent.faction, headquarters: @agent.headquarters, shipcount: @agent.shipcount, symbol: @agent.symbol, user_id: @agent.user_id } }
     end
 
     assert_redirected_to agent_url(Agent.last)
@@ -34,7 +34,7 @@ class AgentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update agent" do
-    patch agent_url(@agent), params: { agent: { apikey: @agent.apikey, faction: @agent.faction, symbol: @agent.symbol } }
+    patch agent_url(@agent), params: { agent: { accountId: @agent.accountId, agent_token: @agent.agent_token, credits: @agent.credits, faction: @agent.faction, headquarters: @agent.headquarters, shipcount: @agent.shipcount, symbol: @agent.symbol, user_id: @agent.user_id } }
     assert_redirected_to agent_url(@agent)
   end
 

@@ -14,9 +14,14 @@ class AgentsTest < ApplicationSystemTestCase
     visit agents_url
     click_on "New agent"
 
-    fill_in "Apikey", with: @agent.apikey
+    fill_in "Accountid", with: @agent.accountId
+    fill_in "Agent token", with: @agent.agent_token
+    fill_in "Credits", with: @agent.credits
     fill_in "Faction", with: @agent.faction
+    fill_in "Headquarters", with: @agent.headquarters
+    fill_in "Shipcount", with: @agent.shipcount
     fill_in "Symbol", with: @agent.symbol
+    fill_in "User", with: @agent.user_id
     click_on "Create Agent"
 
     assert_text "Agent was successfully created"
@@ -27,9 +32,14 @@ class AgentsTest < ApplicationSystemTestCase
     visit agent_url(@agent)
     click_on "Edit this agent", match: :first
 
-    fill_in "Apikey", with: @agent.apikey
+    fill_in "Accountid", with: @agent.accountId
+    fill_in "Agent token", with: @agent.agent_token
+    fill_in "Credits", with: @agent.credits
     fill_in "Faction", with: @agent.faction
+    fill_in "Headquarters", with: @agent.headquarters
+    fill_in "Shipcount", with: @agent.shipcount
     fill_in "Symbol", with: @agent.symbol
+    fill_in "User", with: @agent.user_id
     click_on "Update Agent"
 
     assert_text "Agent was successfully updated"

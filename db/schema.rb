@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_01_180752) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_01_183533) do
   create_table "agents", force: :cascade do |t|
     t.string "symbol"
     t.string "faction"
     t.string "agent_token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.string "accountId"
     t.string "headquarters"
     t.integer "credits"
     t.integer "shipcount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_agents_on_user_id"
   end
 
@@ -79,7 +79,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_01_180752) do
   end
 
   add_foreign_key "agents", "users"
-  add_foreign_key "deliveries", "contracts"
-  add_foreign_key "payments", "contracts"
-  add_foreign_key "sessions", "users"
 end

@@ -22,28 +22,9 @@ class AgentsController < ApplicationController
   # POST /agents or /agents.json
   def create
     @agent = Agent.new(agent_params)
-    @user = current_user
 
-    # TODO we should save the user in the DB before calling the API. and just delete if the API write fails.
-    client = ApiClient.new(@user)
-    resp = client.register(symbol: params["agent"]["symbol"], faction: params["agent"]["faction"], email: @user.email_address)
-    unless resp.success?
-      Rails.logger.error("Registration API failed: #{resp.body}")
-      flash[:error] = "Agent registration failed with external service."
-      render :new and return
-    end
-
-    response_hash = resp.parsed_response
-    token = response_hash["data"]["token"]
-    agent_data = response_hash["data"]["agent"]
-
-    @agent.user = @user
-
-    @agent.agent_token = token
-    @agent.accountId = agent_data["accountId"]
-    @agent.credits = agent_data["credits"]
-    @agent.shipcount = agent_data["shipCount"]
-    @agent.headquarters = agent_data["headquarters"]
+    resp = ::ApiClient.register(symbol: params["agent"]["symbol"], faction: params["agent"]["faction"], email: current_user.email_address)
+    Rails.logger.info resp
 
     respond_to do |format|
       if @agent.save

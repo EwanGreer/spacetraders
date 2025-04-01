@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  resources :agents
   resources :payments
   resources :deliveries
   resources :contracts
   resources :deliverables
   resources :create_deliverables
   resources :create_contracts
-  resources :agents
   resource :session
   resources :passwords, param: :token
   resource :registration, only: %i[new create]

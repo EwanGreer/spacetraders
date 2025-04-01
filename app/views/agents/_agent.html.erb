@@ -1,5 +1,42 @@
-<div id="<%= dom_id agent %>" class="card">
-  <h3><%= agent.symbol %></h3>
-  <p><strong>Faction:</strong> <%= agent.faction %></p>
-</div>
+<div id="<%= dom_id agent %>">
+  <p>
+    <strong>Symbol:</strong>
+    <%= agent.symbol %>
+  </p>
 
+  <p>
+    <strong>Faction:</strong>
+    <%= agent.faction %>
+  </p>
+
+  <p>
+    <strong>Agent token:</strong>
+    <%= agent.agent_token %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= agent.user_id %>
+  </p>
+
+  <p>
+    <strong>Accountid:</strong>
+    <%= agent.accountId %>
+  </p>
+
+  <p>
+    <strong>Headquarters:</strong>
+    <%= agent.headquarters %>
+  </p>
+
+  <p>
+    <strong>Credits:</strong>
+    <%= agent.credits %>
+  </p>
+
+  <p>
+    <strong>Shipcount:</strong>
+    <%= agent.shipcount %>
+  </p>
+
+</div>

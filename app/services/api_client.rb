@@ -1,10 +1,11 @@
 class ApiClient
   include HTTParty
-  base_uri "https://api.spacetraders.io/v2/".freeze
+  base_uri "https://api.spacetraders.io/v2".freeze
 
   def initialize(user)
     @user = user
-    @agent = Agent.find(@user.active_agent)
+    agent_id = @user.active_agent || 0
+    @agent = Agent.find_by(id: agent_id)
   end
 
   def register(payload = {})
@@ -15,6 +16,8 @@ class ApiClient
       },
       body: payload.to_json
     }
+    Rails.logger.info "Making Request"
+
     self.class.post("/register", options)
   end
 
