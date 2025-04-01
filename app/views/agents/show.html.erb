@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
+<h3>Agent Details</h3>
 <%= render @agent %>
 
 <div>
-  <%= link_to "Edit this agent", edit_agent_path(@agent) %> |
-  <%= link_to "Back to agents", agents_path %>
+  <h3>Agent Contracts</h3>
+  <%= render @agent.contracts %>
+</div>
 
-  <%= button_to "Destroy this agent", @agent, method: :delete %>
+<div>
+  <%= link_to "Back to agents", agents_path %>
 </div>

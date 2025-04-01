@@ -5,6 +5,7 @@ class ApiClient
   def initialize(user)
     @user = user
     agent_id = @user.active_agent || 0
+    Rails.logger.info agent_id
     @agent = Agent.find_by(id: agent_id)
   end
 

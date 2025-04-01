@@ -6,10 +6,11 @@
 
 <div id="contracts">
   <% @contracts.each do |contract| %>
-    <%= render contract %>
-    <p>
+    <%# <%= render contract %>
+    <%= contract.external_id %>
+    <span>
       <%= link_to "Show this contract", contract %>
-    </p>
+    </span></br>
   <% end %>
 </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_01_183533) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_01_211630) do
   create_table "agents", force: :cascade do |t|
     t.string "symbol"
     t.string "faction"
@@ -36,6 +36,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_01_183533) do
     t.datetime "deadline_to_accept"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "agent_id"
+    t.index ["agent_id"], name: "index_contracts_on_agent_id"
   end
 
   create_table "deliveries", force: :cascade do |t|

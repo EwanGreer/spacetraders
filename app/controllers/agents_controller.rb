@@ -8,6 +8,9 @@ class AgentsController < ApplicationController
 
   # GET /agents/1 or /agents/1.json
   def show
+    @user = current_user
+    @user.active_agent = @agent.id
+    @user.save
   end
 
   # GET /agents/new
@@ -45,11 +48,14 @@ class AgentsController < ApplicationController
     @agent.shipcount = agent_data["shipCount"]
     @agent.headquarters = agent_data["headquarters"]
 
+
     respond_to do |format|
       if @agent.save
+        @user.active_agent = @agent.id
         format.html { redirect_to @agent, notice: "Agent was successfully created." }
         format.json { render :show, status: :created, location: @agent }
       else
+        @user.active_agent = @agent.id
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @agent.errors, status: :unprocessable_entity }
       end
