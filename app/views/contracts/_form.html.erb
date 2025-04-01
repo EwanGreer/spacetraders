@@ -12,8 +12,8 @@
   <% end %>
 
   <div>
-    <%= form.label :contract_id, style: "display: block" %>
-    <%= form.text_field :contract_id %>
+    <%= form.label :external_id, style: "display: block" %>
+    <%= form.text_field :external_id %>
   </div>
 
   <div>
@@ -27,6 +27,11 @@
   </div>
 
   <div>
+    <%= form.label :terms_deadline, style: "display: block" %>
+    <%= form.datetime_field :terms_deadline %>
+  </div>
+
+  <div>
     <%= form.label :accepted, style: "display: block" %>
     <%= form.checkbox :accepted %>
   </div>
@@ -37,11 +42,6 @@
   </div>
 
   <div>
-    <%= form.label :terms_deadline, style: "display: block" %>
-    <%= form.datetime_field :terms_deadline %>
-  </div>
-
-  <div>
     <%= form.label :expiration, style: "display: block" %>
     <%= form.datetime_field :expiration %>
   </div>
@@ -49,21 +49,6 @@
   <div>
     <%= form.label :deadline_to_accept, style: "display: block" %>
     <%= form.datetime_field :deadline_to_accept %>
-  </div>
-
-  <div>
-    <%= form.label :payment_on_accepted, style: "display: block" %>
-    <%= form.number_field :payment_on_accepted %>
-  </div>
-
-  <div>
-    <%= form.label :payment_on_fulfilled, style: "display: block" %>
-    <%= form.number_field :payment_on_fulfilled %>
-  </div>
-
-  <div>
-    <%= form.label :terms, style: "display: block" %>
-    <%= form.textarea :terms %>
   </div>
 
   <div>

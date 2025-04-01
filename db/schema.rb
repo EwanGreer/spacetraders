@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_01_180420) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_01_180752) do
   create_table "agents", force: :cascade do |t|
     t.string "symbol"
     t.string "faction"
@@ -23,6 +23,39 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_01_180420) do
     t.integer "credits"
     t.integer "shipcount"
     t.index ["user_id"], name: "index_agents_on_user_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.string "external_id"
+    t.string "faction_symbol"
+    t.string "contract_type"
+    t.datetime "terms_deadline"
+    t.boolean "accepted"
+    t.boolean "fulfilled"
+    t.datetime "expiration"
+    t.datetime "deadline_to_accept"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer "contract_id", null: false
+    t.string "trade_symbol"
+    t.string "destination_symbol"
+    t.integer "units_required"
+    t.integer "units_fulfilled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_id"], name: "index_deliveries_on_contract_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "contract_id", null: false
+    t.integer "payment_on_accepted"
+    t.integer "payment_on_fulfilled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_id"], name: "index_payments_on_contract_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -46,5 +79,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_01_180420) do
   end
 
   add_foreign_key "agents", "users"
+  add_foreign_key "deliveries", "contracts"
+  add_foreign_key "payments", "contracts"
   add_foreign_key "sessions", "users"
 end

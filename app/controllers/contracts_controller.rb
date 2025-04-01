@@ -4,9 +4,6 @@ class ContractsController < ApplicationController
   # GET /contracts or /contracts.json
   def index
     @contracts = Contract.all
-
-
-    client = ::ApiClient.new(current_user)
   end
 
   # GET /contracts/1 or /contracts/1.json
@@ -68,6 +65,6 @@ class ContractsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contract_params
-      params.expect(contract: [ :contract_id, :faction_symbol, :contract_type, :accepted, :fulfilled, :terms_deadline, :expiration, :deadline_to_accept, :payment_on_accepted, :payment_on_fulfilled, :terms ])
+      params.expect(contract: [ :external_id, :faction_symbol, :contract_type, :terms_deadline, :accepted, :fulfilled, :expiration, :deadline_to_accept ])
     end
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :payments
+  resources :deliveries
   resources :contracts
   resources :deliverables
   resources :create_deliverables

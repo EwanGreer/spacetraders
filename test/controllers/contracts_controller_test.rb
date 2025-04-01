@@ -17,7 +17,7 @@ class ContractsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create contract" do
     assert_difference("Contract.count") do
-      post contracts_url, params: { contract: { accepted: @contract.accepted, contract_id: @contract.contract_id, contract_type: @contract.contract_type, deadline_to_accept: @contract.deadline_to_accept, expiration: @contract.expiration, faction_symbol: @contract.faction_symbol, fulfilled: @contract.fulfilled, payment_on_accepted: @contract.payment_on_accepted, payment_on_fulfilled: @contract.payment_on_fulfilled, terms: @contract.terms, terms_deadline: @contract.terms_deadline } }
+      post contracts_url, params: { contract: { accepted: @contract.accepted, contract_type: @contract.contract_type, deadline_to_accept: @contract.deadline_to_accept, expiration: @contract.expiration, external_id: @contract.external_id, faction_symbol: @contract.faction_symbol, fulfilled: @contract.fulfilled, terms_deadline: @contract.terms_deadline } }
     end
 
     assert_redirected_to contract_url(Contract.last)
@@ -34,7 +34,7 @@ class ContractsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update contract" do
-    patch contract_url(@contract), params: { contract: { accepted: @contract.accepted, contract_id: @contract.contract_id, contract_type: @contract.contract_type, deadline_to_accept: @contract.deadline_to_accept, expiration: @contract.expiration, faction_symbol: @contract.faction_symbol, fulfilled: @contract.fulfilled, payment_on_accepted: @contract.payment_on_accepted, payment_on_fulfilled: @contract.payment_on_fulfilled, terms: @contract.terms, terms_deadline: @contract.terms_deadline } }
+    patch contract_url(@contract), params: { contract: { accepted: @contract.accepted, contract_type: @contract.contract_type, deadline_to_accept: @contract.deadline_to_accept, expiration: @contract.expiration, external_id: @contract.external_id, faction_symbol: @contract.faction_symbol, fulfilled: @contract.fulfilled, terms_deadline: @contract.terms_deadline } }
     assert_redirected_to contract_url(@contract)
   end
 

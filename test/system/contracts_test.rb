@@ -15,15 +15,12 @@ class ContractsTest < ApplicationSystemTestCase
     click_on "New contract"
 
     check "Accepted" if @contract.accepted
-    fill_in "Contract", with: @contract.contract_id
     fill_in "Contract type", with: @contract.contract_type
     fill_in "Deadline to accept", with: @contract.deadline_to_accept
     fill_in "Expiration", with: @contract.expiration
+    fill_in "External", with: @contract.external_id
     fill_in "Faction symbol", with: @contract.faction_symbol
     check "Fulfilled" if @contract.fulfilled
-    fill_in "Payment on accepted", with: @contract.payment_on_accepted
-    fill_in "Payment on fulfilled", with: @contract.payment_on_fulfilled
-    fill_in "Terms", with: @contract.terms
     fill_in "Terms deadline", with: @contract.terms_deadline
     click_on "Create Contract"
 
@@ -36,15 +33,12 @@ class ContractsTest < ApplicationSystemTestCase
     click_on "Edit this contract", match: :first
 
     check "Accepted" if @contract.accepted
-    fill_in "Contract", with: @contract.contract_id
     fill_in "Contract type", with: @contract.contract_type
     fill_in "Deadline to accept", with: @contract.deadline_to_accept.to_s
     fill_in "Expiration", with: @contract.expiration.to_s
+    fill_in "External", with: @contract.external_id
     fill_in "Faction symbol", with: @contract.faction_symbol
     check "Fulfilled" if @contract.fulfilled
-    fill_in "Payment on accepted", with: @contract.payment_on_accepted
-    fill_in "Payment on fulfilled", with: @contract.payment_on_fulfilled
-    fill_in "Terms", with: @contract.terms
     fill_in "Terms deadline", with: @contract.terms_deadline.to_s
     click_on "Update Contract"
 

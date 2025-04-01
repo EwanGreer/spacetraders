@@ -1,17 +1,22 @@
 <div id="<%= dom_id contract %>">
   <p>
-    <strong>Contract:</strong>
-    <%= contract.contract_id %>
+    <strong>External:</strong>
+    <%= contract.external_id %>
   </p>
 
   <p>
     <strong>Faction symbol:</strong>
-    <%= contract.factionSymbol %>
+    <%= contract.faction_symbol %>
   </p>
 
   <p>
     <strong>Contract type:</strong>
     <%= contract.contract_type %>
+  </p>
+
+  <p>
+    <strong>Terms deadline:</strong>
+    <%= contract.terms_deadline %>
   </p>
 
   <p>
@@ -25,33 +30,13 @@
   </p>
 
   <p>
-    <strong>Terms deadline:</strong>
-    <%= contract.terms_deadline %>
-  </p>
-
-  <p>
     <strong>Expiration:</strong>
     <%= contract.expiration %>
   </p>
 
   <p>
     <strong>Deadline to accept:</strong>
-    <%= contract.deadlineToAccept %>
-  </p>
-
-  <p>
-    <strong>Payment on accepted:</strong>
-    <%= contract.paymentOnAccepted %>
-  </p>
-
-  <p>
-    <strong>Payment on fulfilled:</strong>
-    <%= contract.paymentOnFulfilled %>
-  </p>
-
-  <p>
-    <strong>Terms:</strong>
-    <%= contract.terms %>
+    <%= contract.deadline_to_accept %>
   </p>
 
 </div>
