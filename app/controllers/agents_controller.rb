@@ -3,6 +3,7 @@ class AgentsController < ApplicationController
 
   # GET /agents or /agents.json
   def index
+    # TODO: refresh agent contracts. Possibly only needs done on show?
     @agents = Agent.all
   end
 
@@ -11,6 +12,21 @@ class AgentsController < ApplicationController
     @user = current_user
     @user.active_agent = @agent.id
     @user.save
+
+    client = ApiClient.new(current_user)
+    resp = client.get_contracts
+    unless resp.success?
+      Rails.logger.error("Registration API failed: #{resp.body}")
+      flash[:error] = "Agent registration failed with external service."
+      render :new and return
+    end
+
+    response_hash = resp.parsed_response
+    Rails.logger.info response_hash
+
+    response_hash["data"].each do |contract_data|
+      ContractSyncService.sync(contract_data, @agent)
+    end
   end
 
   # GET /agents/new
