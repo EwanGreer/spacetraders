@@ -24,12 +24,16 @@
   </head>
 
   <body>
-    <nav>
-      <% if authenticated? %>
-        <%= button_to "Sign Out", session_path, method: :delete  %>
-      <% else %>
-        <%= button_to "Sign In", new_session_path %>
-      <% end %>
+
+    <nav style="display: flex; align-items: center;">
+      <%= button_to "Contracts", contracts_path, method: :get %>
+      <div style="margin-left: auto;">
+        <% if authenticated? %>
+          <%= button_to "Sign Out", session_path, method: :delete %>
+        <% else %>
+          <%= button_to "Sign In", new_session_path %>
+        <% end %>
+      </div>
     </nav>
     
     <%= yield %>
