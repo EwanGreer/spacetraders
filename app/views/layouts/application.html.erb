@@ -24,32 +24,23 @@
   </head>
 
   <body>
-
     <header>
-      <nav style="display: flex; align-items: center;">
-        <div>
-          <%= link_to "Home", root_path %>
-          <%= link_to "Contracts", contracts_path %>
-        </div>
-        <div style="margin-left: auto; padding-right: 10px;">
+      <nav style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+          <%= link_to "Home", root_path, class: "button", style: "color: black; border: black;" %>
+          <%= link_to "Contracts", contracts_path, class: "button", style: "color: black; border: black;" %>
           <% if authenticated? %>
-            <%= button_to "Sign Out", session_path, method: :delete %>
+              <%= button_to "Sign Out", session_path, method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
           <% else %>
-            <%= button_to "Sign In", new_session_path %>
+              <%= button_to "Sign In", new_session_path, class: "button" %>
           <% end %>
-        </div>
       </nav>
     </header>
 
     <%= yield %>
 
     <footer >
-      <ul>
-        <li style="list-style: none;">
-          <%= link_to "home", root_path %>
-          <%= link_to "Contracts", contracts_path %>
-        </li>
-      </ul>
+      <%= link_to "Home", root_path %>
+      <%= link_to "Contracts", contracts_path %>
     </footer>
   </body>
 </html>

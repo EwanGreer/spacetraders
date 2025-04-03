@@ -1,42 +1,16 @@
-<div id="<%= dom_id agent %>">
-  <p>
-    <strong>Symbol:</strong>
-    <%= agent.symbol %>
-  </p>
-
-  <p>
-    <strong>Faction:</strong>
-    <%= agent.faction %>
-  </p>
-
-  <p>
-    <strong>Agent token:</strong>
-    <%= agent.agent_token %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= agent.user_id %>
-  </p>
-
-  <p>
-    <strong>Accountid:</strong>
-    <%= agent.accountId %>
-  </p>
-
-  <p>
-    <strong>Headquarters:</strong>
-    <%= agent.headquarters %>
-  </p>
-
-  <p>
-    <strong>Credits:</strong>
-    <%= agent.credits %>
-  </p>
-
-  <p>
-    <strong>Shipcount:</strong>
-    <%= agent.shipcount %>
-  </p>
-
-</div>
+<article id="<%= dom_id agent %>">
+  <h2><%= agent.symbol %></h2>
+  <div class="card-content">
+    <details>
+      <ul style="list-style: none;">
+        <li><strong>Faction:</strong> <%= agent.faction %></li>
+        <li><strong>Agent token:</strong> <%= agent.agent_token %></li>
+        <li><strong>User:</strong> <%= agent.user_id %></li>
+        <li><strong>Accountid:</strong> <%= agent.accountId %></li>
+        <li><strong>Headquarters:</strong> <%= agent.headquarters %></li>
+        <li><strong>Credits:</strong> <%= agent.credits %></li>
+        <li><strong>Shipcount:</strong> <%= agent.shipcount %></li>
+      </ul> 
+    </details>
+  </div>
+</article>

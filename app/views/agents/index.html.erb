@@ -4,13 +4,34 @@
 
 <h1>Agents</h1>
 
-<div id="agents">
-  <% @agents.each do |agent| %>
-    <%= render agent %>
-    <p>
-      <%= link_to "Show this agent", agent %>
-    </p>
-  <% end %>
-</div>
+<%= link_to "New agent", new_agent_path, class: "button", style: "width: fit-content;" %>
 
-<%= link_to "New agent", new_agent_path %>
+<figure>
+  <table id="agents" style="width: 100%; border-collapse: collapse; text-align: center;">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Faction</th>
+        <th>Headquarters</th>
+        <th>Credits</th>
+        <th>Ship Count</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @agents.each do |agent| %>
+        <tr id="<%= dom_id agent %>">
+          <td><%= agent.symbol %></td>
+          <td><%= agent.faction %></td>
+          <td><%= agent.headquarters %></td>
+          <td>$<%= agent.credits %></td>
+          <td><%= agent.shipcount %></td>
+          <td>
+            <%= link_to "details", agent %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</figure>
+
