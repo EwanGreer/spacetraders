@@ -1,7 +1,6 @@
 class ContractSyncService
   def self.sync(contract_data, agent)
     ActiveRecord::Base.transaction do
-      # Find or initialize contract based on external_id
       contract = Contract.find_or_initialize_by(external_id: contract_data["id"])
       contract.assign_attributes(
         faction_symbol:     contract_data["factionSymbol"],
@@ -15,7 +14,6 @@ class ContractSyncService
       )
       contract.save!
 
-      # Sync the Payment record (if present)
       if (payment_data = contract_data["terms"]["payment"]).present?
         payment = Payment.find_or_initialize_by(contract: contract)
         payment.assign_attributes(
@@ -25,9 +23,7 @@ class ContractSyncService
         payment.save!
       end
 
-      # Sync the Delivery record
       if (deliveries = contract_data["terms"]["deliver"]).present?
-        # Take the first delivery from the array
         delivery_data = deliveries.first
         delivery = contract.delivery || contract.build_delivery
         delivery.assign_attributes(

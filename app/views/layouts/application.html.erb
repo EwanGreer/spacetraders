@@ -25,17 +25,31 @@
 
   <body>
 
-    <nav style="display: flex; align-items: center;">
-      <%= button_to "Contracts", contracts_path, method: :get %>
-      <div style="margin-left: auto;">
-        <% if authenticated? %>
-          <%= button_to "Sign Out", session_path, method: :delete %>
-        <% else %>
-          <%= button_to "Sign In", new_session_path %>
-        <% end %>
-      </div>
-    </nav>
-    
+    <header>
+      <nav style="display: flex; align-items: center;">
+        <div>
+          <%= link_to "Home", root_path %>
+          <%= link_to "Contracts", contracts_path %>
+        </div>
+        <div style="margin-left: auto; padding-right: 10px;">
+          <% if authenticated? %>
+            <%= button_to "Sign Out", session_path, method: :delete %>
+          <% else %>
+            <%= button_to "Sign In", new_session_path %>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+
     <%= yield %>
+
+    <footer >
+      <ul>
+        <li style="list-style: none;">
+          <%= link_to "home", root_path %>
+          <%= link_to "Contracts", contracts_path %>
+        </li>
+      </ul>
+    </footer>
   </body>
 </html>

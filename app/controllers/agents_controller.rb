@@ -3,7 +3,6 @@ class AgentsController < ApplicationController
 
   # GET /agents or /agents.json
   def index
-    # TODO: refresh agent contracts. Possibly only needs done on show?
     @agents = Agent.all
   end
 
@@ -22,8 +21,6 @@ class AgentsController < ApplicationController
     end
 
     response_hash = resp.parsed_response
-    Rails.logger.info response_hash
-
     response_hash["data"].each do |contract_data|
       ContractSyncService.sync(contract_data, @agent)
     end
@@ -43,7 +40,7 @@ class AgentsController < ApplicationController
     @agent = Agent.new(agent_params)
     @user = current_user
 
-    # TODO we should save the user in the DB before calling the API. and just delete if the API write fails.
+    # TODO: we should save the user in the DB before calling the API. and just delete if the API write fails.
     client = ApiClient.new(@user)
     resp = client.register(symbol: params["agent"]["symbol"], faction: params["agent"]["faction"], email: @user.email_address)
     unless resp.success?
@@ -64,14 +61,14 @@ class AgentsController < ApplicationController
     @agent.shipcount = agent_data["shipCount"]
     @agent.headquarters = agent_data["headquarters"]
 
+    @user.active_agent = @agent.id
+    @user.save!
 
     respond_to do |format|
       if @agent.save
-        @user.active_agent = @agent.id
         format.html { redirect_to @agent, notice: "Agent was successfully created." }
         format.json { render :show, status: :created, location: @agent }
       else
-        @user.active_agent = @agent.id
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @agent.errors, status: :unprocessable_entity }
       end

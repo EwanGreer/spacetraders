@@ -14,8 +14,6 @@ class ContractsController < ApplicationController
     end
 
     response_hash = resp.parsed_response
-    Rails.logger.info response_hash
-
     response_hash["data"].each do |contract_data|
       agent = Agent.find_by(id: current_user.active_agent)
       ContractSyncService.sync(contract_data, agent)
