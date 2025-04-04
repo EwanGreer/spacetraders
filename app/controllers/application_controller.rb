@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= Current.session&.user
   end
+
+  def current_agent
+    @current_agent ||= Agent.find(Current.session&.user.active_agent)
+  end
 end

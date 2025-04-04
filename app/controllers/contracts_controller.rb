@@ -3,14 +3,14 @@ class ContractsController < ApplicationController
 
   # GET /contracts or /contracts.json
   def index
-    @contracts = Contract.all
+    @contracts = current_agent.contracts
 
     client = ApiClient.new(current_user)
     resp = client.get_contracts
     unless resp.success?
       Rails.logger.error("Registration API failed: #{resp.body}")
       flash[:error] = "Agent registration failed with external service."
-      render :new and return
+      render :index and return
     end
 
     response_hash = resp.parsed_response
