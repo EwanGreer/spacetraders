@@ -4,6 +4,20 @@
 
 <h1>Contracts</h1>
 
+<form action="/users/current-agent" method="post">
+  <label for="options">Active agent:</label>
+  <select id="options" name="id">
+    <option value="">Select an agent</option>
+    <% @user.agents.each do |agent| %>
+      <option value="<%= agent.id %>">
+        <%= "selected" if current_agent.id == agent.id %>
+        <%= agent.symbol %>
+      </option>
+    <% end %>
+  </select>
+  <button type="submit">Update</button>
+</form>
+
 <figure>
   <table id="contracts" style="width: 100%; border-collapse: collapse; text-align: center;">
     <thead>

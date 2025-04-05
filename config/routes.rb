@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :deliverables
   resources :create_deliverables
   resources :create_contracts
+
+  resources :users
+
   resource :session
   resources :passwords, param: :token
   resource :registration, only: %i[new create]
@@ -18,6 +21,8 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+  post "/users/current-agent", to: "users#update_active_agent"
 
   # Defines the root path route ("/")
   root "agents#index"
