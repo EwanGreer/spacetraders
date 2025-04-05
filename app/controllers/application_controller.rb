@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include Authentication
 
+  before_action :set_user
+
   helper_method :current_user
   helper_method :current_agent
 
@@ -13,5 +15,9 @@ class ApplicationController < ActionController::Base
 
   def current_agent
     @current_agent ||= Agent.find(Current.session&.user.active_agent)
+  end
+
+  def set_user
+    @user = current_user
   end
 end

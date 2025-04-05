@@ -5,7 +5,7 @@ class ContractsController < ApplicationController
   def index
     @contracts = current_agent.contracts
 
-    client = ApiClient.new(current_user)
+    client = ApiClient.new(@user)
     resp = client.get_contracts
     unless resp.success?
       Rails.logger.error("Registration API failed: #{resp.body}")
@@ -15,7 +15,7 @@ class ContractsController < ApplicationController
 
     response_hash = resp.parsed_response
     response_hash["data"].each do |contract_data|
-      agent = Agent.find_by(id: current_user.active_agent)
+      agent = Agent.find_by(id: @user.active_agent)
       ContractSyncService.sync(contract_data, agent)
     end
   end

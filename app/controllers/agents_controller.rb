@@ -3,16 +3,15 @@ class AgentsController < ApplicationController
 
   # GET /agents or /agents.json
   def index
-    @agents = current_user.agents
+    @agents = @user.agents
   end
 
   # GET /agents/1 or /agents/1.json
   def show
-    @user = current_user
     @user.active_agent = @agent.id
     @user.save
 
-    client = ApiClient.new(current_user)
+    client = ApiClient.new(@user)
     resp = client.get_contracts
     unless resp.success?
       Rails.logger.error("GetContracts API failed: #{resp.body}")
@@ -38,7 +37,6 @@ class AgentsController < ApplicationController
   # POST /agents or /agents.json
   def create
     @agent = Agent.new(agent_params)
-    @user = current_user
 
     # TODO: we should save the user in the DB before calling the API. and just delete if the API write fails.
     client = ApiClient.new(@user)
